@@ -1,0 +1,1362 @@
+%!PS-Adobe-3.0
+%%Title: stdin
+%%For: Lixudong
+%%Creator: a2ps version 4.14
+%%CreationDate: Fri Feb 26 22:24:02 2021
+%%BoundingBox: 24 24 571 818
+%%DocumentData: Clean7Bit
+%%Orientation: Landscape
+%%Pages: 4
+%%PageOrder: Ascend
+%%DocumentMedia: A4 595 842 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-BoldOblique
+%%+ font Courier-Oblique
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Symbol
+%%+ font Times-Bold
+%%+ font Times-Roman
+%%DocumentProcessColors: Black 
+%%DocumentSuppliedResources: procset a2ps-a2ps-hdr
+%%+ procset a2ps-black+white-Prolog
+%%+ encoding ISO-8859-1Encoding
+%%EndComments
+/a2psdict 200 dict def
+a2psdict begin
+%%BeginProlog
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+
+% EPSF import as in the Red Book
+/BeginInclude {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack 
+  userdict begin
+    0 setgray 0 setlinecap
+    1 setlinewidth 0 setlinejoin
+    10 setmiterlimit [ ] 0 setdash newpath
+    gs_languagelevel 1 ne {
+      false setstrokeadjust false setoverprint 
+    } if
+} bind def
+
+/EndInclude {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+/BeginEPSF {
+  BeginInclude
+  /showpage { } def
+} bind def
+
+/EndEPSF {
+  EndInclude
+} bind def
+
+% Page prefeed
+/page_prefeed {         % bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} bind def
+
+/deffont {
+  findfont exch scalefont def
+} bind def
+
+/reencode_font {
+  findfont reencode 2 copy definefont pop def
+} bind def
+
+% Function c-show (str => -)
+% centers text only according to x axis.
+/c-show { 
+  dup stringwidth pop
+  2 div neg 0 rmoveto
+  show
+} bind def
+
+% Function l-show (str => -)
+% prints texts so that it ends at currentpoint
+/l-show {
+  dup stringwidth pop neg 
+  0 
+  rmoveto show
+} bind def
+
+% center-fit show (str w => -)
+% show centered, and scale currentfont so that the width is less than w
+/cfshow {
+  exch dup stringwidth pop
+  % If the title is too big, try to make it smaller
+  3 2 roll 2 copy
+  gt
+  { % if, i.e. too big
+    exch div
+    currentfont exch scalefont setfont
+  } { % ifelse
+    pop pop 
+  }
+  ifelse
+  c-show			% center title
+} bind def
+
+% Return the y size of the current font
+% - => fontsize
+/currentfontsize {
+  currentfont /FontType get 0 eq {
+    currentfont /FontMatrix get 3 get
+  }{
+    currentfont /FontMatrix get 3 get 1000 mul
+  } ifelse
+} bind def
+
+% reencode the font
+% <encoding-vector> <fontdict> -> <newfontdict>
+/reencode { %def
+  dup length 5 add dict begin
+    { %forall
+      % <vector> <key> <val>
+      1 index /FID ne 
+      { def }{ pop pop } ifelse
+    } forall
+    /Encoding exch def % -
+
+    % Use the font's bounding box to determine the ascent, descent,
+    % and overall height; don't forget that these values have to be
+    % transformed using the font's matrix.
+    % We use `load' because sometimes BBox is executable, sometimes not.
+    % Since we need 4 numbers an not an array avoid BBox from being executed
+    /FontBBox load aload pop
+    FontMatrix transform /Ascent exch def pop
+    FontMatrix transform /Descent exch def pop
+    /FontHeight Ascent Descent sub def
+
+    % Get the underline position and thickness if they're defined.
+    % Use 1 if they are not defined.
+    currentdict /FontInfo 2 copy known
+    { get
+      /UnderlinePosition 2 copy % <FontInfo> /UP <FontInfo> /UP
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+
+      /UnderlineThickness 2 copy % <FontInfo> /UT <FontInfo> /UT
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+      pop % -
+    }{ pop pop
+    } ifelse
+
+    currentdict
+  end 
+} bind def
+
+% composite fonts for ASCII-EUC mixed strings
+% Version 1.2 1/31/1990
+% Original Ken'ichi HANDA (handa@etl.go.jp)
+% Modified Norio Katayama (katayama@rd.nacsis.ac.jp),1998
+% Extend & Fix Koji Nakamaru (maru@on.cs.keio.ac.jp), 1999
+% Anyone can freely copy, modify, distribute this program.
+
+/copyfont {	% font-dic extra-entry-count  copyfont  font-dic
+	1 index maxlength add dict begin
+	{	1 index /FID ne 2 index /UniqueID ne and
+		{def} {pop pop} ifelse
+	} forall
+	currentdict
+	end
+} bind def
+
+/compositefont { % ASCIIFontName EUCFontName RomanScale RomanOffset Rot(T/F) compositefont font
+    /RomanRotation exch def
+    /RomanOffset exch def
+    /RomanScale exch def
+    userdict /fixeucfont_dict known not {
+	userdict begin
+	    /fixeucfont_dict 2 dict begin
+		/UpperByteEncoding [
+		    16#00 1 16#20 { pop 0 } for
+		    16#21 1 16#28 { 16#20 sub } for
+		    16#29 1 16#2F { pop 0 } for
+		    16#30 1 16#74 { 16#27 sub } for
+		    16#75 1 16#FF { pop 0 } for
+		] def
+	        /LowerByteEncoding [
+		    16#00 1 16#A0 { pop /.notdef } for
+		    16#A1 1 16#FE { 16#80 sub 16 2 string cvrs
+				    (cXX) dup 1 4 -1 roll
+				    putinterval cvn } for
+		    /.notdef
+		] def
+		currentdict
+	    end def
+	end
+    } if
+    findfont dup /FontType get 0 eq {
+	14 dict begin
+	    %
+	    % 7+8 bit EUC font
+	    %
+	    12 dict begin
+		/EUCFont exch def
+		/FontInfo (7+8 bit EUC font) readonly def
+		/PaintType 0 def
+		/FontType 0 def
+		/FontMatrix matrix def
+		% /FontName
+		/Encoding fixeucfont_dict /UpperByteEncoding get def
+		/FMapType 2 def
+		EUCFont /WMode known
+		{ EUCFont /WMode get /WMode exch def }
+		{ /WMode 0 def } ifelse
+		/FDepVector [
+		    EUCFont /FDepVector get 0 get
+		    [ 16#21 1 16#28 {} for 16#30 1 16#74 {} for ]
+		    {
+			13 dict begin
+			    /EUCFont EUCFont def
+			    /UpperByte exch 16#80 add def	
+			    % /FontName
+			    /FontInfo (EUC lower byte font) readonly def
+			    /PaintType 0 def
+			    /FontType 3 def
+			    /FontMatrix matrix def
+			    /FontBBox {0 0 0 0} def
+			    /Encoding
+				fixeucfont_dict /LowerByteEncoding get def
+			    % /UniqueID
+			    % /WMode
+			    /BuildChar {
+				gsave
+				exch dup /EUCFont get setfont
+				/UpperByte get
+				2 string
+				dup 0 4 -1 roll put
+				dup 1 4 -1 roll put
+				dup stringwidth setcharwidth
+				0 0 moveto show
+				grestore
+			    } bind def
+			    currentdict
+			end
+			/lowerbytefont exch definefont
+		    } forall
+		] def
+		currentdict
+	    end
+	    /eucfont exch definefont
+	    exch
+	    findfont 1 copyfont dup begin
+		RomanRotation {
+			/FontMatrix FontMatrix
+			[ 0 RomanScale neg RomanScale 0 RomanOffset neg 0 ]
+			matrix concatmatrix def
+		}{
+			/FontMatrix FontMatrix
+			[ RomanScale 0 0 RomanScale 0 RomanOffset ] matrix concatmatrix
+			def
+			/CDevProc
+			    {pop pop pop pop 0 exch -1000 exch 2 div 880} def
+		} ifelse
+	    end
+	    /asciifont exch definefont
+	    exch
+	    /FDepVector [ 4 2 roll ] def
+	    /FontType 0 def
+	    /WMode 0 def
+	    /FMapType 4 def
+	    /FontMatrix matrix def
+	    /Encoding [0 1] def
+	    /FontBBox {0 0 0 0} def
+%	    /FontHeight 1.0 def % XXXX
+	    /FontHeight RomanScale 1.0 ge { RomanScale }{ 1.0 } ifelse def
+	    /Descent -0.3 def   % XXXX
+	    currentdict
+	end
+	/tmpfont exch definefont
+	pop
+	/tmpfont findfont
+    }{
+	pop findfont 0 copyfont
+    } ifelse
+} def	
+
+/slantfont {	% FontName slant-degree  slantfont  font'
+    exch findfont 1 copyfont begin
+    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix
+    /FontMatrix exch def
+    currentdict
+    end
+} def
+
+% Function print line number (<string> # -)
+/# {
+  gsave
+    sx cw mul neg 2 div 0 rmoveto
+    f# setfont
+    c-show
+  grestore
+} bind def
+
+% -------- Some routines to enlight plain b/w printings ---------
+
+% Underline
+% width --
+/dounderline {
+  currentpoint
+  gsave
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    0 rlineto
+    stroke
+  grestore
+} bind def
+
+% Underline a string
+% string --
+/dounderlinestring {
+  stringwidth pop
+  dounderline
+} bind def
+
+/UL {
+  /ul exch store
+} bind def
+
+% Draw a box of WIDTH wrt current font
+% width --
+/dobox {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    stroke
+  grestore
+} bind def
+
+/BX {
+  /bx exch store
+} bind def
+
+% Box a string
+% string --
+/doboxstring {
+  stringwidth pop
+  dobox
+} bind def
+
+%
+% ------------- Color routines ---------------
+%
+/FG /setrgbcolor load def
+
+% Draw the background
+% width --
+/dobackground {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    bgcolor aload pop setrgbcolor
+    fill
+  grestore
+} bind def
+
+% Draw bg for a string
+% string --
+/dobackgroundstring {
+  stringwidth pop
+  dobackground
+} bind def
+
+
+/BG {
+  dup /bg exch store
+  { mark 4 1 roll ] /bgcolor exch store } if
+} bind def
+
+
+/Show {
+  bg { dup dobackgroundstring } if
+  ul { dup dounderlinestring } if
+  bx { dup doboxstring } if
+  show
+} bind def
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T {
+  cw mul x0 add
+  bg { dup currentpoint pop sub dobackground } if
+  ul { dup currentpoint pop sub dounderline } if
+  bx { dup currentpoint pop sub dobox } if
+  y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n {
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+/S {
+  Show
+} bind def
+
+%%BeginResource: procset a2ps-a2ps-hdr 2.0 2
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Function title: prints page header.
+% <ct> <rt> <lt> are passed as argument
+/title { 
+  % 1. Draw the background
+  x v get y v get moveto
+  gsave
+    0 th 2 div neg rmoveto 
+    th setlinewidth
+    0.95 setgray
+    pw 0 rlineto stroke
+  grestore
+  % 2. Border it
+  gsave
+    0.7 setlinewidth
+    pw 0 rlineto
+    0 th neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+  % stk: ct rt lt
+  x v get y v get th sub 1 add moveto
+%%IncludeResource: font Helvetica
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  % 3. The left title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    fnfs 0.8 mul hm rmoveto
+    show			% left title
+  grestore
+  exch
+  % stk: ct ltw rt
+  % 4. the right title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    dup
+    pw exch stringwidth pop fnfs 0.8 mul add sub
+    hm
+    rmoveto
+    show			% right title
+  grestore
+  % stk: ct ltw rtw
+  % 5. the center title
+  gsave
+    pw 3 1 roll
+    % stk: ct pw ltw rtw
+    3 copy 
+    % Move to the center of the left room
+    sub add 2 div hm rmoveto
+    % What is the available space in here?
+    add sub fnfs 0.8 mul sub fnfs 0.8 mul sub
+    % stk: ct space_left
+%%IncludeResource: font Helvetica-Bold
+  fHelvetica-Bold fnfs scalefont setfont
+    cfshow
+  grestore
+} bind def
+
+% Function border: prints virtual page border
+/border { %def
+  gsave				% print four sides
+    0 setgray
+    x v get y v get moveto
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function water: prints a water mark in background
+/water { %def
+  gsave
+    scx scy moveto rotate
+%%IncludeResource: font Times-Bold
+  fTimes-Bold 100 scalefont setfont
+    .97 setgray
+    dup stringwidth pop 2 div neg -50 rmoveto
+    show
+  grestore
+} bind def
+
+% Function rhead: prints the right header
+/rhead {  %def
+  lx ly moveto
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  l-show
+} bind def
+
+% Function footer (cf rf lf -> -)
+/footer {
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  dx dy moveto
+  show
+
+  snx sny moveto
+  l-show
+  
+  fnx fny moveto
+  c-show
+} bind def
+%%EndResource
+%%BeginResource: procset a2ps-black+white-Prolog 2.0 1
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T { 
+  cw mul x0 add y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n { %def
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+}  bind def
+
+/S {
+  Show
+} bind def
+
+/p {
+  false UL
+  false BX
+  fCourier bfs scalefont setfont
+  Show
+} bind def
+
+/sy {
+  false UL
+  false BX
+  fSymbol bfs scalefont setfont
+  Show
+} bind def
+
+/k {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/K {
+  false UL
+  false BX
+  fCourier-Bold bfs scalefont setfont
+  Show
+} bind def
+
+/c {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/C {
+  false UL
+  false BX
+  fCourier-BoldOblique bfs scalefont setfont
+  Show 
+} bind def
+
+/l {
+  false UL
+  false BX
+  fHelvetica bfs scalefont setfont
+  Show
+} bind def
+
+/L {
+  false UL
+  false BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show 
+} bind def
+
+/str{
+  false UL
+  false BX
+  fTimes-Roman bfs scalefont setfont
+  Show
+} bind def
+
+/e{
+  false UL
+  true BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show
+} bind def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier
+%%IncludeResource: font Courier-Oblique
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Times-Roman
+%%IncludeResource: font Symbol
+%%IncludeResource: font Courier-BoldOblique
+%%BeginResource: encoding ISO-8859-1Encoding
+/ISO-8859-1Encoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright 
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash 
+/zero /one /two /three /four /five /six /seven 
+/eight /nine /colon /semicolon /less /equal /greater /question 
+/at /A /B /C /D /E /F /G 
+/H /I /J /K /L /M /N /O 
+/P /Q /R /S /T /U /V /W 
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore 
+/quoteleft /a /b /c /d /e /f /g 
+/h /i /j /k /l /m /n /o 
+/p /q /r /s /t /u /v /w 
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section 
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron 
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /bullet 
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown 
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla 
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis 
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply 
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls 
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla 
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis 
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide 
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis 
+] def
+%%EndResource
+% Initialize page description variables.
+/sh 595 def
+/sw 842 def
+/llx 24 def
+/urx 818 def
+/ury 571 def
+/lly 24 def
+/#copies 1 def
+/th 15.000000 def
+/fnfs 11 def
+/bfs 7.616192 def
+/cw 4.569715 def
+
+% Dictionary for ISO-8859-1 support
+/iso1dict 8 dict begin
+  /fCourier ISO-8859-1Encoding /Courier reencode_font
+  /fCourier-Bold ISO-8859-1Encoding /Courier-Bold reencode_font
+  /fCourier-BoldOblique ISO-8859-1Encoding /Courier-BoldOblique reencode_font
+  /fCourier-Oblique ISO-8859-1Encoding /Courier-Oblique reencode_font
+  /fHelvetica ISO-8859-1Encoding /Helvetica reencode_font
+  /fHelvetica-Bold ISO-8859-1Encoding /Helvetica-Bold reencode_font
+  /fTimes-Bold ISO-8859-1Encoding /Times-Bold reencode_font
+  /fTimes-Roman ISO-8859-1Encoding /Times-Roman reencode_font
+currentdict end def
+/bgcolor [ 0 0 0 ] def
+/bg false def
+/ul false def
+/bx false def
+% The font for line numbering
+/f# /Helvetica findfont bfs .6 mul scalefont def
+/fSymbol /Symbol findfont def
+/hm fnfs 0.25 mul def
+/pw
+   cw 85.400000 mul
+def
+/ph
+   507.999997 th add
+def
+/pmw urx llx sub pw 2 mul sub 1 div def
+/pmh 0 def
+/v 0 def
+/x [
+  0
+  dup pmw add pw add
+] def
+/y [
+  pmh ph add 0 mul ph add
+  dup
+] def
+/scx sw 2 div def
+/scy sh 2 div def
+/snx urx def
+/sny lly 2 add def
+/dx llx def
+/dy sny def
+/fnx scx def
+/fny dy def
+/lx snx def
+/ly ury fnfs 0.8 mul sub def
+/sx 0 def
+/tab 8 def
+/x0 0 def
+/y0 0 def
+%%EndSetup
+
+%%Page: (1-2) 1
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(GET) p 8 T () S 16 T () S 24 T (avahi-publish-service) S 48 T (cat) N
+(HEAD) S 8 T () S 16 T () S 24 T (avahi-resolve) S 40 T () S 48 T (catchsegv) N
+(POST) S 8 T () S 16 T () S 24 T (avahi-resolve-address) S 48 T (catman) N
+(X) S 8 T () S 16 T () S 24 T (avahi-resolve-host-name cautious-launcher) N
+(X11) S 8 T () S 16 T () S 24 T (avahi-set-host-name) S 48 T (cc) N
+(Xephyr) S 8 T () S 16 T () S 24 T (awk) S 32 T () S 40 T () S 48 T (cd-create-profile) N
+(Xorg) S 8 T () S 16 T () S 24 T (axfer) S 32 T () S 40 T () S 48 T (cd-fix-profile) N
+(Xwayland) S 16 T () S 24 T (b2sum) S 32 T () S 40 T () S 48 T (cd-iccdump) N
+([) S 8 T () S 16 T () S 24 T (baobab) S 32 T () S 40 T () S 48 T (cd-it8) N
+(a2ps) S 8 T () S 16 T () S 24 T (base32) S 32 T () S 40 T () S 48 T (chacl) N
+(a2ps-lpr-wrapper) S 24 T (base64) S 32 T () S 40 T () S 48 T (chafa) N
+(aa-enabled) S 16 T () S 24 T (basename) S 40 T () S 48 T (chage) N
+(aa-exec) S 8 T () S 16 T () S 24 T (bash) S 32 T () S 40 T () S 48 T (chardet3) N
+(aconnect) S 16 T () S 24 T (bashbug) S 32 T () S 40 T () S 48 T (chardetect3) N
+(acpi_listen) S 16 T () S 24 T (bc) S 32 T () S 40 T () S 48 T (chattr) N
+(add-apt-repository) S 24 T (bccmd) S 32 T () S 40 T () S 48 T (chcon) N
+(addpart) S 8 T () S 16 T () S 24 T (bdftopcf) S 40 T () S 48 T (check-language-support) N
+(addr2line) S 16 T () S 24 T (bdftruncate) S 40 T () S 48 T (cheese) N
+(alsabat) S 8 T () S 16 T () S 24 T (bitmap) S 32 T () S 40 T () S 48 T (chfn) N
+(alsaloop) S 16 T () S 24 T (bluemoon) S 40 T () S 48 T (chgrp) N
+(alsamixer) S 16 T () S 24 T (bluetooth-sendto) S 48 T (chmod) N
+(alsatplg) S 16 T () S 24 T (bluetoothctl) S 40 T () S 48 T (choom) N
+(alsaucm) S 8 T () S 16 T () S 24 T (bmtoa) S 32 T () S 40 T () S 48 T (chown) N
+(amidi) S 8 T () S 16 T () S 24 T (boltctl) S 32 T () S 40 T () S 48 T (chrome-gnome-shell) N
+(amixer) S 8 T () S 16 T () S 24 T (bootctl) S 32 T () S 40 T () S 48 T (chrt) N
+(amuFormat.sh) S 16 T () S 24 T (brltty) S 32 T () S 40 T () S 48 T (chsh) N
+(apg) S 8 T () S 16 T () S 24 T (brltty-ctb) S 40 T () S 48 T (chvt) N
+(apgbfm) S 8 T () S 16 T () S 24 T (brltty-trtxt) S 40 T () S 48 T (ciptool) N
+(aplay) S 8 T () S 16 T () S 24 T (brltty-ttb) S 40 T () S 48 T (ckbcomp) N
+(aplaymidi) S 16 T () S 24 T (broadwayd) S 40 T () S 48 T (cksum) N
+(apport-bug) S 16 T () S 24 T (browse) S 32 T () S 40 T () S 48 T (clear) N
+(apport-cli) S 16 T () S 24 T (bsd-from) S 40 T () S 48 T (clear_console) N
+(apport-collect) S 16 T () S 24 T (bsd-write) S 40 T () S 48 T (cmp) N
+(apport-unpack) S 16 T () S 24 T (btattach) S 40 T () S 48 T (codepage) N
+(appres) S 8 T () S 16 T () S 24 T (btmgmt) S 32 T () S 40 T () S 48 T (col) N
+(appstreamcli) S 16 T () S 24 T (btmon) S 32 T () S 40 T () S 48 T (colcrt) N
+(apropos) S 8 T () S 16 T () S 24 T (bunzip2) S 32 T () S 40 T () S 48 T (colormgr) N
+(apt) S 8 T () S 16 T () S 24 T (busctl) S 32 T () S 40 T () S 48 T (colrm) N
+(apt-add-repository) S 24 T (busybox) S 32 T () S 40 T () S 48 T (column) N
+(apt-cache) S 16 T () S 24 T (bwrap) S 32 T () S 40 T () S 48 T (comm) N
+(apt-cdrom) S 16 T () S 24 T (bzcat) S 32 T () S 40 T () S 48 T (compose) N
+(apt-config) S 16 T () S 24 T (bzcmp) S 32 T () S 40 T () S 48 T (composeglyphs) N
+(apt-extracttemplates) S 24 T (bzdiff) S 32 T () S 40 T () S 48 T (corelist) N
+(apt-ftparchive) S 16 T () S 24 T (bzegrep) S 32 T () S 40 T () S 48 T (cp) N
+(apt-get) S 8 T () S 16 T () S 24 T (bzexe) S 32 T () S 40 T () S 48 T (cpan) N
+(apt-key) S 8 T () S 16 T () S 24 T (bzfgrep) S 32 T () S 40 T () S 48 T (cpan5.30-x86_64-linux-g) N
+(apt-mark) S 16 T () S 24 T (bzgrep) S 32 T () S 40 T () S 48 T (cpio) N
+(apt-sortpkgs) S 16 T () S 24 T (bzip2) S 32 T () S 40 T () S 48 T (cpp) N
+(aptdcon) S 8 T () S 16 T () S 24 T (bzip2recover) S 40 T () S 48 T (cpp-9) N
+(apturl) S 8 T () S 16 T () S 24 T (bzless) S 32 T () S 40 T () S 48 T (crontab) N
+(apturl-gtk) S 16 T () S 24 T (bzmore) S 32 T () S 40 T () S 48 T (csplit) N
+(ar) S 8 T () S 16 T () S 24 T (c++) S 32 T () S 40 T () S 48 T (ctstat) N
+(arch) S 8 T () S 16 T () S 24 T (c++filt) S 32 T () S 40 T () S 48 T (cupstestppd) N
+(arecord) S 8 T () S 16 T () S 24 T (c89) S 32 T () S 40 T () S 48 T (cut) N
+(arecordmidi) S 16 T () S 24 T (c89-gcc) S 32 T () S 40 T () S 48 T (cvt) N
+(arm2hpdl) S 16 T () S 24 T (c99) S 32 T () S 40 T () S 48 T (cvtsudoers) N
+(as) S 8 T () S 16 T () S 24 T (c99-gcc) S 32 T () S 40 T () S 48 T (dash) N
+(aseqdump) S 16 T () S 24 T (c_rehash) S 40 T () S 48 T (date) N
+(aseqnet) S 8 T () S 16 T () S 24 T (cabextract) S 40 T () S 48 T (dbus-cleanup-sockets) N
+(aspell) S 8 T () S 16 T () S 24 T (cal) S 32 T () S 40 T () S 48 T (dbus-daemon) N
+(aspell-import) S 16 T () S 24 T (calendar) S 40 T () S 48 T (dbus-launch) N
+(atobm) S 8 T () S 16 T () S 24 T (calibrate_ppa) S 40 T () S 48 T (dbus-monitor) N
+(avahi-browse) S 16 T () S 24 T (canberra-gtk-play) S 48 T (dbus-run-session) N
+(avahi-browse-domains) S 24 T (cancel) S 32 T () S 40 T () S 48 T (dbus-send) N
+(avahi-publish) S 16 T () S 24 T (captoinfo) S 40 T () S 48 T (dbus-update-activation-) N
+(avahi-publish-address) S 24 T (card) S 32 T () S 40 T () S 48 T (dbus-uuidgen) N
+(stdin) (Page 1/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+/v 1 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(dc) p 8 T () S 16 T () S 24 T (enchant-2) S 40 T () S 48 T (foo2lava) N
+(dconf) S 8 T () S 16 T () S 24 T (enchant-lsmod-2) S 40 T () S 48 T (foo2lava-wrapper) N
+(dd) S 8 T () S 16 T () S 24 T (env) S 32 T () S 40 T () S 48 T (foo2oak) N
+(ddstdecode) S 16 T () S 24 T (envsubst) S 40 T () S 48 T (foo2oak-wrapper) N
+(deallocvt) S 16 T () S 24 T (eog) S 32 T () S 40 T () S 48 T (foo2qpdl) N
+(deb-systemd-helper) S 24 T (eps2eps) S 32 T () S 40 T () S 48 T (foo2qpdl-wrapper) N
+(deb-systemd-invoke) S 24 T (epsffit) S 32 T () S 40 T () S 48 T (foo2slx) N
+(debconf) S 8 T () S 16 T () S 24 T (eqn) S 32 T () S 40 T () S 48 T (foo2slx-wrapper) N
+(debconf-apt-progress) S 24 T (esc-m) S 32 T () S 40 T () S 48 T (foo2xqx) N
+(debconf-communicate) S 24 T (eutp) S 32 T () S 40 T () S 48 T (foo2xqx-wrapper) N
+(debconf-copydb) S 16 T () S 24 T (evince) S 32 T () S 40 T () S 48 T (foo2zjs) N
+(debconf-escape) S 16 T () S 24 T (evince-previewer) S 48 T (foo2zjs-icc2ps) N
+(debconf-set-selections) S 24 T (evince-thumbnailer) S 48 T (foo2zjs-pstops) N
+(debconf-show) S 16 T () S 24 T (ex) S 32 T () S 40 T () S 48 T (foo2zjs-wrapper) N
+(deja-dup) S 16 T () S 24 T (expand) S 32 T () S 40 T () S 48 T (foomatic-rip) N
+(delpart) S 8 T () S 16 T () S 24 T (expiry) S 32 T () S 40 T () S 48 T (fprintd-delete) N
+(delv) S 8 T () S 16 T () S 24 T (expr) S 32 T () S 40 T () S 48 T (fprintd-enroll) N
+(desktop-file-edit) S 24 T (extractres) S 40 T () S 48 T (fprintd-list) N
+(desktop-file-install) S 24 T (factor) S 32 T () S 40 T () S 48 T (fprintd-verify) N
+(desktop-file-validate) S 24 T (faillog) S 32 T () S 40 T () S 48 T (free) N
+(devdump) S 8 T () S 16 T () S 24 T (fallocate) S 40 T () S 48 T (from) N
+(df) S 8 T () S 16 T () S 24 T (false) S 32 T () S 40 T () S 48 T (ftp) N
+(dfu-tool) S 16 T () S 24 T (fc-cache) S 40 T () S 48 T (funzip) N
+(dh_bash-completion) S 24 T (fc-cat) S 32 T () S 40 T () S 48 T (fuser) N
+(dh_installxmlcatalogs) S 24 T (fc-conflist) S 40 T () S 48 T (fusermount) N
+(dh_perl_openssl) S 16 T () S 24 T (fc-list) S 32 T () S 40 T () S 48 T (futurize) N
+(dialog) S 8 T () S 16 T () S 24 T (fc-match) S 40 T () S 48 T (fwupdagent) N
+(diff) S 8 T () S 16 T () S 24 T (fc-pattern) S 40 T () S 48 T (fwupdate) N
+(diff3) S 8 T () S 16 T () S 24 T (fc-query) S 40 T () S 48 T (fwupdmgr) N
+(dig) S 8 T () S 16 T () S 24 T (fc-scan) S 32 T () S 40 T () S 48 T (fwupdtool) N
+(dir) S 8 T () S 16 T () S 24 T (fc-validate) S 40 T () S 48 T (fwupdtpmevlog) N
+(dircolors) S 16 T () S 24 T (ffmpeg) S 32 T () S 40 T () S 48 T (g++) N
+(dirmngr) S 8 T () S 16 T () S 24 T (ffplay) S 32 T () S 40 T () S 48 T (g++-9) N
+(dirmngr-client) S 16 T () S 24 T (ffprobe) S 32 T () S 40 T () S 48 T (gamemoded) N
+(dirname) S 8 T () S 16 T () S 24 T (fgconsole) S 40 T () S 48 T (gamemoderun) N
+(dirsplit) S 16 T () S 24 T (fgrep) S 32 T () S 40 T () S 48 T (gamma4scanimage) N
+(dmesg) S 8 T () S 16 T () S 24 T (file) S 32 T () S 40 T () S 48 T (gapplication) N
+(dnsdomainname) S 16 T () S 24 T (file-roller) S 40 T () S 48 T (gatttool) N
+(do-release-upgrade) S 24 T (file2brl) S 40 T () S 48 T (gcalccmd) N
+(domainname) S 16 T () S 24 T (fincore) S 32 T () S 40 T () S 48 T (gcc) N
+(dpkg) S 8 T () S 16 T () S 24 T (find) S 32 T () S 40 T () S 48 T (gcc-9) N
+(dpkg-deb) S 16 T () S 24 T (findmnt) S 32 T () S 40 T () S 48 T (gcc-ar) N
+(dpkg-divert) S 16 T () S 24 T (firefox) S 32 T () S 40 T () S 48 T (gcc-ar-9) N
+(dpkg-maintscript-helper fixdlsrps) S 40 T () S 48 T (gcc-nm) N
+(dpkg-query) S 16 T () S 24 T (fixfmps) S 32 T () S 40 T () S 48 T (gcc-nm-9) N
+(dpkg-split) S 16 T () S 24 T (fixnt) S 32 T () S 40 T () S 48 T (gcc-ranlib) N
+(dpkg-statoverride) S 24 T (fixps) S 32 T () S 40 T () S 48 T (gcc-ranlib-9) N
+(dpkg-trigger) S 16 T () S 24 T (fixpsditps) S 40 T () S 48 T (gcore) N
+(driverless) S 16 T () S 24 T (fixpspps) S 40 T () S 48 T (gcov) N
+(du) S 8 T () S 16 T () S 24 T (fixscribeps) S 40 T () S 48 T (gcov-9) N
+(dumpkeys) S 16 T () S 24 T (fixtpps) S 32 T () S 40 T () S 48 T (gcov-dump) N
+(duplicity) S 16 T () S 24 T (fixwfwps) S 40 T () S 48 T (gcov-dump-9) N
+(dvipdf) S 8 T () S 16 T () S 24 T (fixwpps) S 32 T () S 40 T () S 48 T (gcov-tool) N
+(dwp) S 8 T () S 16 T () S 24 T (fixwwps) S 32 T () S 40 T () S 48 T (gcov-tool-9) N
+(echo) S 8 T () S 16 T () S 24 T (flock) S 32 T () S 40 T () S 48 T (gcr-viewer) N
+(ed) S 8 T () S 16 T () S 24 T (fmt) S 32 T () S 40 T () S 48 T (gdb) N
+(edit) S 8 T () S 16 T () S 24 T (fold) S 32 T () S 40 T () S 48 T (gdb-add-index) N
+(editor) S 8 T () S 16 T () S 24 T (fonttosfnt) S 40 T () S 48 T (gdbserver) N
+(editres) S 8 T () S 16 T () S 24 T (foo2ddst) S 40 T () S 48 T (gdbtui) N
+(efibootdump) S 16 T () S 24 T (foo2ddst-wrapper) S 48 T (gdbus) N
+(efibootmgr) S 16 T () S 24 T (foo2hbpl2) S 40 T () S 48 T (gdialog) N
+(egrep) S 8 T () S 16 T () S 24 T (foo2hbpl2-wrapper) S 48 T (gdk-pixbuf-csource) N
+(eject) S 8 T () S 16 T () S 24 T (foo2hiperc) S 40 T () S 48 T (gdk-pixbuf-pixdata) N
+(elfedit) S 8 T () S 16 T () S 24 T (foo2hiperc-wrapper) S 48 T (gdk-pixbuf-thumbnailer) N
+(enc2xs) S 8 T () S 16 T () S 24 T (foo2hp) S 32 T () S 40 T () S 48 T (gdm-screenshot) N
+(encguess) S 16 T () S 24 T (foo2hp2600-wrapper) S 48 T (gdmflexiserver) N
+(stdin) (Page 2/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+grestore
+(Printed by Lixudong) rhead
+(stdin) (1/4) (\346M-^XM-^_\346M-^\\M-^_\344\272M-^T \344\272M-^L\346M-^\\M-^H 26, 2021) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (3-4) 2
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(gedit) p 8 T () S 16 T () S 24 T (gpasswd) S 32 T () S 40 T () S 48 T (gvfs-copy) N
+(gencat) S 8 T () S 16 T () S 24 T (gpg) S 32 T () S 40 T () S 48 T (gvfs-info) N
+(genisoimage) S 16 T () S 24 T (gpg-agent) S 40 T () S 48 T (gvfs-less) N
+(geqn) S 8 T () S 16 T () S 24 T (gpg-connect-agent) S 48 T (gvfs-ls) N
+(getafm) S 8 T () S 16 T () S 24 T (gpg-wks-server) S 40 T () S 48 T (gvfs-mime) N
+(getconf) S 8 T () S 16 T () S 24 T (gpg-zip) S 32 T () S 40 T () S 48 T (gvfs-mkdir) N
+(geteltorito) S 16 T () S 24 T (gpgcompose) S 40 T () S 48 T (gvfs-monitor-dir) N
+(getent) S 8 T () S 16 T () S 24 T (gpgconf) S 32 T () S 40 T () S 48 T (gvfs-monitor-file) N
+(getfacl) S 8 T () S 16 T () S 24 T (gpgparsemail) S 40 T () S 48 T (gvfs-mount) N
+(getkeycodes) S 16 T () S 24 T (gpgsm) S 32 T () S 40 T () S 48 T (gvfs-move) N
+(getopt) S 8 T () S 16 T () S 24 T (gpgsplit) S 40 T () S 48 T (gvfs-open) N
+(gettext) S 8 T () S 16 T () S 24 T (gpgtar) S 32 T () S 40 T () S 48 T (gvfs-rename) N
+(gettext.sh) S 16 T () S 24 T (gpgv) S 32 T () S 40 T () S 48 T (gvfs-rm) N
+(ghostscript) S 16 T () S 24 T (gpic) S 32 T () S 40 T () S 48 T (gvfs-save) N
+(ginstall-info) S 16 T () S 24 T (gprof) S 32 T () S 40 T () S 48 T (gvfs-set-attribute) N
+(gio) S 8 T () S 16 T () S 24 T (gpu-manager) S 40 T () S 48 T (gvfs-trash) N
+(gio-querymodules) S 24 T (grep) S 32 T () S 40 T () S 48 T (gvfs-tree) N
+(gipddecode) S 16 T () S 24 T (gresource) S 40 T () S 48 T (gzexe) N
+(git) S 8 T () S 16 T () S 24 T (groff) S 32 T () S 40 T () S 48 T (gzip) N
+(git-receive-pack) S 24 T (grog) S 32 T () S 40 T () S 48 T (h2ph) N
+(git-shell) S 16 T () S 24 T (grops) S 32 T () S 40 T () S 48 T (h2xs) N
+(git-upload-archive) S 24 T (grotty) S 32 T () S 40 T () S 48 T (hbpldecode) N
+(git-upload-pack) S 16 T () S 24 T (groups) S 32 T () S 40 T () S 48 T (hciattach) N
+(gjs) S 8 T () S 16 T () S 24 T (grub-editenv) S 40 T () S 48 T (hciconfig) N
+(gjs-console) S 16 T () S 24 T (grub-file) S 40 T () S 48 T (hcitool) N
+(gkbd-keyboard-display) S 24 T (grub-fstest) S 40 T () S 48 T (hd) N
+(glib-compile-schemas) S 24 T (grub-glue-efi) S 40 T () S 48 T (head) N
+(gnome-calculator) S 24 T (grub-kbdcomp) S 40 T () S 48 T (helpztags) N
+(gnome-calendar) S 16 T () S 24 T (grub-menulst2cfg) S 48 T (hex2hcd) N
+(gnome-characters) S 24 T (grub-mkfont) S 40 T () S 48 T (hexdump) N
+(gnome-control-center) S 24 T (grub-mkimage) S 40 T () S 48 T (hipercdecode) N
+(gnome-disk-image-mounte grub-mklayout) S 40 T () S 48 T (host) N
+(gnome-disks) S 16 T () S 24 T (grub-mknetdir) S 40 T () S 48 T (hostid) N
+(gnome-extensions) S 24 T (grub-mkpasswd-pbkdf2) S 48 T (hostname) N
+(gnome-extensions-app) S 24 T (grub-mkrelpath) S 40 T () S 48 T (hostnamectl) N
+(gnome-font-viewer) S 24 T (grub-mkrescue) S 40 T () S 48 T (hp-align) N
+(gnome-help) S 16 T () S 24 T (grub-mkstandalone) S 48 T (hp-check) N
+(gnome-keyring) S 16 T () S 24 T (grub-mount) S 40 T () S 48 T (hp-clean) N
+(gnome-keyring-3) S 16 T () S 24 T (grub-ntldr-img) S 40 T () S 48 T (hp-colorcal) N
+(gnome-keyring-daemon) S 24 T (grub-render-label) S 48 T (hp-config_usb_printer) N
+(gnome-language-selector grub-script-check) S 48 T (hp-doctor) N
+(gnome-logs) S 16 T () S 24 T (grub-syslinux2cfg) S 48 T (hp-firmware) N
+(gnome-power-statistics) S 24 T (gs) S 32 T () S 40 T () S 48 T (hp-info) N
+(gnome-screenshot) S 24 T (gsbj) S 32 T () S 40 T () S 48 T (hp-levels) N
+(gnome-session) S 16 T () S 24 T (gsdj) S 32 T () S 40 T () S 48 T (hp-logcapture) N
+(gnome-session-custom-se gsdj500) S 32 T () S 40 T () S 48 T (hp-makeuri) N
+(gnome-session-inhibit) S 24 T (gsettings) S 40 T () S 48 T (hp-pkservice) N
+(gnome-session-propertie gslj) S 32 T () S 40 T () S 48 T (hp-plugin) N
+(gnome-session-quit) S 24 T (gslp) S 32 T () S 40 T () S 48 T (hp-plugin-ubuntu) N
+(gnome-session-remmina) S 24 T (gsnd) S 32 T () S 40 T () S 48 T (hp-probe) N
+(gnome-shell) S 16 T () S 24 T (gst-device-monitor-1.0) S 48 T (hp-query) N
+(gnome-shell-extension-p gst-discoverer-1.0) S 48 T (hp-scan) N
+(gnome-shell-extension-t gst-inspect-1.0) S 40 T () S 48 T (hp-setup) N
+(gnome-shell-perf-tool) S 24 T (gst-launch-1.0) S 40 T () S 48 T (hp-testpage) N
+(gnome-system-monitor) S 24 T (gst-play-1.0) S 40 T () S 48 T (hp-timedate) N
+(gnome-terminal) S 16 T () S 24 T (gst-typefind-1.0) S 48 T (hwe-support-status) N
+(gnome-terminal.real) S 24 T (gstreamer-codec-install i386) N
+(gnome-terminal.wrapper) S 24 T (gtbl) S 32 T () S 40 T () S 48 T (i686-linux-gnu-pkg-conf) N
+(gnome-text-editor) S 24 T (gtf) S 32 T () S 40 T () S 48 T (ibus) N
+(gnome-thumbnail-font) S 24 T (gtk-builder-tool) S 48 T (ibus-daemon) N
+(gnome-todo) S 16 T () S 24 T (gtk-encode-symbolic-svg ibus-setup) N
+(gnome-tweaks) S 16 T () S 24 T (gtk-launch) S 40 T () S 48 T (ibus-table-createdb) N
+(gnome-www-browser) S 24 T (gtk-query-settings) S 48 T (iceauth) N
+(gold) S 8 T () S 16 T () S 24 T (gtk-update-icon-cache) S 48 T (ico) N
+(google-chrome) S 16 T () S 24 T (gunzip) S 32 T () S 40 T () S 48 T (iconv) N
+(google-chrome-stable) S 24 T (gvfs-cat) S 40 T () S 48 T (id) N
+(stdin) (Page 3/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+/v 1 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(iecset) p 8 T () S 16 T () S 24 T (libwacom-list-local-dev lz4cat) N
+(ijs_pxljr) S 16 T () S 24 T (link) S 32 T () S 40 T () S 48 T (lzcat) N
+(im-config) S 16 T () S 24 T (linkicc) S 32 T () S 40 T () S 48 T (lzcmp) N
+(im-launch) S 16 T () S 24 T (linux-boot-prober) S 48 T (lzdiff) N
+(includeres) S 16 T () S 24 T (linux-check-removal) S 48 T (lzegrep) N
+(info) S 8 T () S 16 T () S 24 T (linux-update-symlinks) S 48 T (lzfgrep) N
+(infobrowser) S 16 T () S 24 T (linux-version) S 40 T () S 48 T (lzgrep) N
+(infocmp) S 8 T () S 16 T () S 24 T (linux32) S 32 T () S 40 T () S 48 T (lzless) N
+(infotocap) S 16 T () S 24 T (linux64) S 32 T () S 40 T () S 48 T (lzma) N
+(inputattach) S 16 T () S 24 T (listres) S 32 T () S 40 T () S 48 T (lzmainfo) N
+(install) S 8 T () S 16 T () S 24 T (ln) S 32 T () S 40 T () S 48 T (lzmore) N
+(install-info) S 16 T () S 24 T (lnstat) S 32 T () S 40 T () S 48 T (m2300w) N
+(install-printerdriver) S 24 T (loadkeys) S 40 T () S 48 T (m2300w-wrapper) N
+(instmodsh) S 16 T () S 24 T (loadunimap) S 40 T () S 48 T (m2400w) N
+(intel-virtual-output) S 24 T (localc) S 32 T () S 40 T () S 48 T (mako-render) N
+(ionice) S 8 T () S 16 T () S 24 T (locale) S 32 T () S 40 T () S 48 T (man) N
+(ip) S 8 T () S 16 T () S 24 T (locale-check) S 40 T () S 48 T (man-recode) N
+(ipcmk) S 8 T () S 16 T () S 24 T (localectl) S 40 T () S 48 T (mandb) N
+(ipcrm) S 8 T () S 16 T () S 24 T (localedef) S 40 T () S 48 T (manpath) N
+(ipcs) S 8 T () S 16 T () S 24 T (lodraw) S 32 T () S 40 T () S 48 T (mapscrn) N
+(ipod-read-sysinfo-exten loffice) S 32 T () S 40 T () S 48 T (mattrib) N
+(ipod-time-sync) S 16 T () S 24 T (lofromtemplate) S 40 T () S 48 T (mawk) N
+(ippfind) S 8 T () S 16 T () S 24 T (logger) S 32 T () S 40 T () S 48 T (mbadblocks) N
+(ipptool) S 8 T () S 16 T () S 24 T (login) S 32 T () S 40 T () S 48 T (mc) N
+(iptables-xml) S 16 T () S 24 T (loginctl) S 40 T () S 48 T (mcat) N
+(ischroot) S 16 T () S 24 T (logname) S 32 T () S 40 T () S 48 T (mcd) N
+(isdv4-serial-debugger) S 24 T (loimpress) S 40 T () S 48 T (mcdiff) N
+(isdv4-serial-inputattac lomath) S 32 T () S 40 T () S 48 T (mcedit) N
+(isodump) S 8 T () S 16 T () S 24 T (look) S 32 T () S 40 T () S 48 T (mcheck) N
+(isoinfo) S 8 T () S 16 T () S 24 T (lorder) S 32 T () S 40 T () S 48 T (mclasserase) N
+(isovfy) S 8 T () S 16 T () S 24 T (loweb) S 32 T () S 40 T () S 48 T (mcomp) N
+(ispell-wrapper) S 16 T () S 24 T (lowntfs-3g) S 40 T () S 48 T (mcookie) N
+(join) S 8 T () S 16 T () S 24 T (lowriter) S 40 T () S 48 T (mcopy) N
+(journalctl) S 16 T () S 24 T (lp) S 32 T () S 40 T () S 48 T (mcview) N
+(jpgicc) S 8 T () S 16 T () S 24 T (lp_solve) S 40 T () S 48 T (md5sum) N
+(json_pp) S 8 T () S 16 T () S 24 T (lpoptions) S 40 T () S 48 T (md5sum.textutils) N
+(kbd_mode) S 16 T () S 24 T (lpq) S 32 T () S 40 T () S 48 T (mdel) N
+(kbdinfo) S 8 T () S 16 T () S 24 T (lpr) S 32 T () S 40 T () S 48 T (mdeltree) N
+(kbxutil) S 8 T () S 16 T () S 24 T (lprm) S 32 T () S 40 T () S 48 T (mdig) N
+(kernel-install) S 16 T () S 24 T (lpstat) S 32 T () S 40 T () S 48 T (mdir) N
+(kerneloops-submit) S 24 T (ls) S 32 T () S 40 T () S 48 T (mdu) N
+(keyring) S 8 T () S 16 T () S 24 T (lsattr) S 32 T () S 40 T () S 48 T (mesa-overlay-control.py) N
+(kill) S 8 T () S 16 T () S 24 T (lsb_release) S 40 T () S 48 T (mesg) N
+(killall) S 8 T () S 16 T () S 24 T (lsblk) S 32 T () S 40 T () S 48 T (mformat) N
+(kmod) S 8 T () S 16 T () S 24 T (lscpu) S 32 T () S 40 T () S 48 T (migrate-pubring-from-cl) N
+(kmodsign) S 16 T () S 24 T (lshw) S 32 T () S 40 T () S 48 T (mimeopen) N
+(l2ping) S 8 T () S 16 T () S 24 T (lsinitramfs) S 40 T () S 48 T (mimetype) N
+(l2test) S 8 T () S 16 T () S 24 T (lsipc) S 32 T () S 40 T () S 48 T (min12xxw) N
+(laptop-detect) S 16 T () S 24 T (lslocks) S 32 T () S 40 T () S 48 T (minfo) N
+(last) S 8 T () S 16 T () S 24 T (lslogins) S 40 T () S 48 T (mk_modmap) N
+(lastb) S 8 T () S 16 T () S 24 T (lsmem) S 32 T () S 40 T () S 48 T (mkdir) N
+(lastlog) S 8 T () S 16 T () S 24 T (lsmod) S 32 T () S 40 T () S 48 T (mkfifo) N
+(lavadecode) S 16 T () S 24 T (lsns) S 32 T () S 40 T () S 48 T (mkfontdir) N
+(lcf) S 8 T () S 16 T () S 24 T (lsof) S 32 T () S 40 T () S 48 T (mkfontscale) N
+(ld) S 8 T () S 16 T () S 24 T (lspci) S 32 T () S 40 T () S 48 T (mkisofs) N
+(ld.bfd) S 8 T () S 16 T () S 24 T (lspgpot) S 32 T () S 40 T () S 48 T (mkmanifest) N
+(ld.gold) S 8 T () S 16 T () S 24 T (lsusb) S 32 T () S 40 T () S 48 T (mknod) N
+(ldd) S 8 T () S 16 T () S 24 T (ltrace) S 32 T () S 40 T () S 48 T (mksquashfs) N
+(less) S 8 T () S 16 T () S 24 T (luit) S 32 T () S 40 T () S 48 T (mktemp) N
+(lessecho) S 16 T () S 24 T (lwp-download) S 40 T () S 48 T (mkzftree) N
+(lessfile) S 16 T () S 24 T (lwp-dump) S 40 T () S 48 T (mlabel) N
+(lesskey) S 8 T () S 16 T () S 24 T (lwp-mirror) S 40 T () S 48 T (mmcli) N
+(lesspipe) S 16 T () S 24 T (lwp-request) S 40 T () S 48 T (mmd) N
+(lexgrog) S 8 T () S 16 T () S 24 T (lz) S 32 T () S 40 T () S 48 T (mmount) N
+(libnetcfg) S 16 T () S 24 T (lz4) S 32 T () S 40 T () S 48 T (mmove) N
+(libreoffice) S 16 T () S 24 T (lz4c) S 32 T () S 40 T () S 48 T (mokutil) N
+(stdin) (Page 4/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+grestore
+(Printed by Lixudong) rhead
+(stdin) (2/4) (\346M-^XM-^_\346M-^\\M-^_\344\272M-^T \344\272M-^L\346M-^\\M-^H 26, 2021) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (5-6) 3
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(monitor-sensor) p 16 T () S 24 T (ntfscmp) S 32 T () S 40 T () S 48 T (pdiff) N
+(more) S 8 T () S 16 T () S 24 T (ntfsdecrypt) S 40 T () S 48 T (peekfd) N
+(mount) S 8 T () S 16 T () S 24 T (ntfsfallocate) S 40 T () S 48 T (perl) N
+(mountpoint) S 16 T () S 24 T (ntfsfix) S 32 T () S 40 T () S 48 T (perl5.30-x86_64-linux-g) N
+(mousetweaks) S 16 T () S 24 T (ntfsinfo) S 40 T () S 48 T (perl5.30.0) N
+(mpartition) S 16 T () S 24 T (ntfsls) S 32 T () S 40 T () S 48 T (perlbug) N
+(mrd) S 8 T () S 16 T () S 24 T (ntfsmove) S 40 T () S 48 T (perldoc) N
+(mren) S 8 T () S 16 T () S 24 T (ntfsrecover) S 40 T () S 48 T (perli11ndoc) N
+(mscompress) S 16 T () S 24 T (ntfssecaudit) S 40 T () S 48 T (perlivp) N
+(msexpand) S 16 T () S 24 T (ntfstruncate) S 40 T () S 48 T (perlthanks) N
+(mshortname) S 16 T () S 24 T (ntfsusermap) S 40 T () S 48 T (pf2afm) N
+(mshowfat) S 16 T () S 24 T (ntfswipe) S 40 T () S 48 T (pfbtopfa) N
+(mt) S 8 T () S 16 T () S 24 T (numfmt) S 32 T () S 40 T () S 48 T (pftp) N
+(mt-gnu) S 8 T () S 16 T () S 24 T (nvidia-detector) S 40 T () S 48 T (pgrep) N
+(mtools) S 8 T () S 16 T () S 24 T (oakdecode) S 40 T () S 48 T (pic) N
+(mtoolstest) S 16 T () S 24 T (obexctl) S 32 T () S 40 T () S 48 T (pico) N
+(mtr) S 8 T () S 16 T () S 24 T (objcopy) S 32 T () S 40 T () S 48 T (piconv) N
+(mtr-packet) S 16 T () S 24 T (objdump) S 32 T () S 40 T () S 48 T (pidof) N
+(mtrace) S 8 T () S 16 T () S 24 T (oclock) S 32 T () S 40 T () S 48 T (pinentry) N
+(mtype) S 8 T () S 16 T () S 24 T (od) S 32 T () S 40 T () S 48 T (pinentry-curses) N
+(mutter) S 8 T () S 16 T () S 24 T (oem-getlogs) S 40 T () S 48 T (pinentry-gnome3) N
+(mv) S 8 T () S 16 T () S 24 T (ogonkify) S 40 T () S 48 T (pinentry-x11) N
+(mxtar) S 8 T () S 16 T () S 24 T (on_ac_power) S 40 T () S 48 T (ping) N
+(mzip) S 8 T () S 16 T () S 24 T (openssl) S 32 T () S 40 T () S 48 T (ping4) N
+(namei) S 8 T () S 16 T () S 24 T (openvt) S 32 T () S 40 T () S 48 T (ping6) N
+(nano) S 8 T () S 16 T () S 24 T (opldecode) S 40 T () S 48 T (pinky) N
+(nautilus) S 16 T () S 24 T (orca) S 32 T () S 40 T () S 48 T (pkaction) N
+(nautilus-autorun-softwa orca-dm-wrapper) S 40 T () S 48 T (pkcheck) N
+(nautilus-sendto) S 16 T () S 24 T (os-prober) S 40 T () S 48 T (pkcon) N
+(nawk) S 8 T () S 16 T () S 24 T (p11-kit) S 32 T () S 40 T () S 48 T (pkexec) N
+(nc) S 8 T () S 16 T () S 24 T (pa-info) S 32 T () S 40 T () S 48 T (pkg-config) N
+(nc.openbsd) S 16 T () S 24 T (pacat) S 32 T () S 40 T () S 48 T (pkill) N
+(ncal) S 8 T () S 16 T () S 24 T (pacmd) S 32 T () S 40 T () S 48 T (pkmon) N
+(neofetch) S 16 T () S 24 T (pactl) S 32 T () S 40 T () S 48 T (pkttyagent) N
+(neqn) S 8 T () S 16 T () S 24 T (padsp) S 32 T () S 40 T () S 48 T (pl2pm) N
+(netcat) S 8 T () S 16 T () S 24 T (pager) S 32 T () S 40 T () S 48 T (pldd) N
+(netkit-ftp) S 16 T () S 24 T (pamon) S 32 T () S 40 T () S 48 T (plog) N
+(networkctl) S 16 T () S 24 T (paperconf) S 40 T () S 48 T (plymouth) N
+(networkd-dispatcher) S 24 T (paplay) S 32 T () S 40 T () S 48 T (pmap) N
+(newgrp) S 8 T () S 16 T () S 24 T (parec) S 32 T () S 40 T () S 48 T (pnm2ppa) N
+(ngettext) S 16 T () S 24 T (parecord) S 40 T () S 48 T (pod2html) N
+(nice) S 8 T () S 16 T () S 24 T (partx) S 32 T () S 40 T () S 48 T (pod2man) N
+(nisdomainname) S 16 T () S 24 T (passwd) S 32 T () S 40 T () S 48 T (pod2text) N
+(nl) S 8 T () S 16 T () S 24 T (paste) S 32 T () S 40 T () S 48 T (pod2usage) N
+(nm) S 8 T () S 16 T () S 24 T (pasteurize) S 40 T () S 48 T (podchecker) N
+(nm-applet) S 16 T () S 24 T (pasuspender) S 40 T () S 48 T (podselect) N
+(nm-connection-editor) S 24 T (patch) S 32 T () S 40 T () S 48 T (poff) N
+(nm-online) S 16 T () S 24 T (pathchk) S 32 T () S 40 T () S 48 T (pon) N
+(nmcli) S 8 T () S 16 T () S 24 T (pax11publish) S 40 T () S 48 T (ppdc) N
+(nmtui) S 8 T () S 16 T () S 24 T (pdb3) S 32 T () S 40 T () S 48 T (ppdhtml) N
+(nmtui-connect) S 16 T () S 24 T (pdb3.8) S 32 T () S 40 T () S 48 T (ppdi) N
+(nmtui-edit) S 16 T () S 24 T (pdf2dsc) S 32 T () S 40 T () S 48 T (ppdmerge) N
+(nmtui-hostname) S 16 T () S 24 T (pdf2ps) S 32 T () S 40 T () S 48 T (ppdpo) N
+(nohup) S 8 T () S 16 T () S 24 T (pdfattach) S 40 T () S 48 T (pphs) N
+(notepadqq) S 16 T () S 24 T (pdfdetach) S 40 T () S 48 T (pr) N
+(notify-send) S 16 T () S 24 T (pdffonts) S 40 T () S 48 T (precat) N
+(nproc) S 8 T () S 16 T () S 24 T (pdfimages) S 40 T () S 48 T (preconv) N
+(nroff) S 8 T () S 16 T () S 24 T (pdfinfo) S 32 T () S 40 T () S 48 T (preunzip) N
+(nsenter) S 8 T () S 16 T () S 24 T (pdfseparate) S 40 T () S 48 T (prezip) N
+(nslookup) S 16 T () S 24 T (pdfsig) S 32 T () S 40 T () S 48 T (prezip-bin) N
+(nstat) S 8 T () S 16 T () S 24 T (pdftocairo) S 40 T () S 48 T (print) N
+(nsupdate) S 16 T () S 24 T (pdftohtml) S 40 T () S 48 T (printafm) N
+(ntfs-3g) S 8 T () S 16 T () S 24 T (pdftoppm) S 40 T () S 48 T (printenv) N
+(ntfs-3g.probe) S 16 T () S 24 T (pdftops) S 32 T () S 40 T () S 48 T (printer-profile) N
+(ntfscat) S 8 T () S 16 T () S 24 T (pdftotext) S 40 T () S 48 T (printerbanner) N
+(ntfscluster) S 16 T () S 24 T (pdfunite) S 40 T () S 48 T (printf) N
+(stdin) (Page 5/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+/v 1 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(prlimit) p 8 T () S 16 T () S 24 T (readelf) S 32 T () S 40 T () S 48 T (session-migration) N
+(prove) S 8 T () S 16 T () S 24 T (readlink) S 40 T () S 48 T (sessreg) N
+(prtstat) S 8 T () S 16 T () S 24 T (realpath) S 40 T () S 48 T (setarch) N
+(ps) S 8 T () S 16 T () S 24 T (red) S 32 T () S 40 T () S 48 T (setfacl) N
+(ps2ascii) S 16 T () S 24 T (remmina) S 32 T () S 40 T () S 48 T (setfont) N
+(ps2epsi) S 8 T () S 16 T () S 24 T (remmina-file-wrapper) S 48 T (setkeycodes) N
+(ps2pdf) S 8 T () S 16 T () S 24 T (remmina-gnome) S 40 T () S 48 T (setleds) N
+(ps2pdf12) S 16 T () S 24 T (rename.ul) S 40 T () S 48 T (setlogcons) N
+(ps2pdf13) S 16 T () S 24 T (rendercheck) S 40 T () S 48 T (setmetamode) N
+(ps2pdf14) S 16 T () S 24 T (renice) S 32 T () S 40 T () S 48 T (setpci) N
+(ps2pdfwr) S 16 T () S 24 T (reset) S 32 T () S 40 T () S 48 T (setpriv) N
+(ps2ps) S 8 T () S 16 T () S 24 T (resizecons) S 40 T () S 48 T (setsid) N
+(ps2ps2) S 8 T () S 16 T () S 24 T (resizepart) S 40 T () S 48 T (setterm) N
+(ps2txt) S 8 T () S 16 T () S 24 T (resolvectl) S 40 T () S 48 T (setupcon) N
+(psbook) S 8 T () S 16 T () S 24 T (rev) S 32 T () S 40 T () S 48 T (setxkbmap) N
+(psfaddtable) S 16 T () S 24 T (rfcomm) S 32 T () S 40 T () S 48 T (sftp) N
+(psfgettable) S 16 T () S 24 T (rgrep) S 32 T () S 40 T () S 48 T (sg) N
+(psfstriptable) S 16 T () S 24 T (rhythmbox) S 40 T () S 48 T (sh) N
+(psfxtable) S 16 T () S 24 T (rhythmbox-client) S 48 T (sha1sum) N
+(psicc) S 8 T () S 16 T () S 24 T (rlogin) S 32 T () S 40 T () S 48 T (sha224sum) N
+(psjoin) S 8 T () S 16 T () S 24 T (rm) S 32 T () S 40 T () S 48 T (sha256sum) N
+(pslog) S 8 T () S 16 T () S 24 T (rmdir) S 32 T () S 40 T () S 48 T (sha384sum) N
+(psmandup) S 16 T () S 24 T (rnano) S 32 T () S 40 T () S 48 T (sha512sum) N
+(psmerge) S 8 T () S 16 T () S 24 T (routef) S 32 T () S 40 T () S 48 T (shasum) N
+(psnup) S 8 T () S 16 T () S 24 T (routel) S 32 T () S 40 T () S 48 T (shotwell) N
+(psresize) S 16 T () S 24 T (rpcgen) S 32 T () S 40 T () S 48 T (showchar) N
+(psselect) S 16 T () S 24 T (rrsync) S 32 T () S 40 T () S 48 T (showconsolefont) N
+(psset) S 8 T () S 16 T () S 24 T (rsh) S 32 T () S 40 T () S 48 T (showkey) N
+(pstops) S 8 T () S 16 T () S 24 T (rstart) S 32 T () S 40 T () S 48 T (showrgb) N
+(pstree) S 8 T () S 16 T () S 24 T (rstartd) S 32 T () S 40 T () S 48 T (shred) N
+(pstree.x11) S 16 T () S 24 T (rsync) S 32 T () S 40 T () S 48 T (shuf) N
+(ptar) S 8 T () S 16 T () S 24 T (rtstat) S 32 T () S 40 T () S 48 T (simple-scan) N
+(ptardiff) S 16 T () S 24 T (run-mailcap) S 40 T () S 48 T (size) N
+(ptargrep) S 16 T () S 24 T (run-parts) S 40 T () S 48 T (skill) N
+(ptx) S 8 T () S 16 T () S 24 T (run-with-aspell) S 40 T () S 48 T (slabtop) N
+(pulseaudio) S 16 T () S 24 T (runcon) S 32 T () S 40 T () S 48 T (sleep) N
+(pv) S 8 T () S 16 T () S 24 T (rview) S 32 T () S 40 T () S 48 T (slogin) N
+(pwd) S 8 T () S 16 T () S 24 T (rvim) S 32 T () S 40 T () S 48 T (slxdecode) N
+(pwdx) S 8 T () S 16 T () S 24 T (rygel) S 32 T () S 40 T () S 48 T (smproxy) N
+(py3clean) S 16 T () S 24 T (sane-find-scanner) S 48 T (snap) N
+(py3compile) S 16 T () S 24 T (savelog) S 32 T () S 40 T () S 48 T (snapctl) N
+(py3rsa-decrypt) S 16 T () S 24 T (sbattach) S 40 T () S 48 T (snapfuse) N
+(py3rsa-encrypt) S 16 T () S 24 T (sbkeysync) S 40 T () S 48 T (snice) N
+(py3rsa-keygen) S 16 T () S 24 T (sbsiglist) S 40 T () S 48 T (soelim) N
+(py3rsa-priv2pub) S 16 T () S 24 T (sbsign) S 32 T () S 40 T () S 48 T (soffice) N
+(py3rsa-sign) S 16 T () S 24 T (sbvarsign) S 40 T () S 48 T (software-properties-gtk) N
+(py3rsa-verify) S 16 T () S 24 T (sbverify) S 40 T () S 48 T (sort) N
+(py3versions) S 16 T () S 24 T (scanimage) S 40 T () S 48 T (sotruss) N
+(pydoc3) S 8 T () S 16 T () S 24 T (scp) S 32 T () S 40 T () S 48 T (spd-conf) N
+(pydoc3.8) S 16 T () S 24 T (scp-dbus-service) S 48 T (spd-say) N
+(pygettext3) S 16 T () S 24 T (screendump) S 40 T () S 48 T (speaker-test) N
+(pygettext3.8) S 16 T () S 24 T (screenfetch) S 40 T () S 48 T (speech-dispatcher) N
+(pyjwt3) S 8 T () S 16 T () S 24 T (script) S 32 T () S 40 T () S 48 T (spice-vdagent) N
+(python3) S 8 T () S 16 T () S 24 T (scriptreplay) S 40 T () S 48 T (splain) N
+(python3-futurize) S 24 T (scrot) S 32 T () S 40 T () S 48 T (split) N
+(python3-pasteurize) S 24 T (sdiff) S 32 T () S 40 T () S 48 T (splitfont) N
+(python3.8) S 16 T () S 24 T (sdptool) S 32 T () S 40 T () S 48 T (sprof) N
+(qpdldecode) S 16 T () S 24 T (seahorse) S 40 T () S 48 T (ss) N
+(qt-faststart) S 16 T () S 24 T (sed) S 32 T () S 40 T () S 48 T (ssh) N
+(quirks-handler) S 16 T () S 24 T (see) S 32 T () S 40 T () S 48 T (ssh-add) N
+(ranlib) S 8 T () S 16 T () S 24 T (select-default-iwrap) S 48 T (ssh-agent) N
+(rbash) S 8 T () S 16 T () S 24 T (select-editor) S 40 T () S 48 T (ssh-argv0) N
+(rcp) S 8 T () S 16 T () S 24 T (sensible-browser) S 48 T (ssh-copy-id) N
+(rctest) S 8 T () S 16 T () S 24 T (sensible-editor) S 40 T () S 48 T (ssh-import-id) N
+(rdiffdir) S 16 T () S 24 T (sensible-pager) S 40 T () S 48 T (ssh-import-id-gh) N
+(rdma) S 8 T () S 16 T () S 24 T (seq) S 32 T () S 40 T () S 48 T (ssh-import-id-lp) N
+(stdin) (Page 6/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+grestore
+(Printed by Lixudong) rhead
+(stdin) (3/4) (\346M-^XM-^_\346M-^\\M-^_\344\272M-^T \344\272M-^L\346M-^\\M-^H 26, 2021) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (7-8) 4
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(ssh-keygen) p 16 T () S 24 T (timeout) S 32 T () S 40 T () S 48 T (update-manager) N
+(ssh-keyscan) S 16 T () S 24 T (tload) S 32 T () S 40 T () S 48 T (update-mime-database) N
+(start-pulseaudio-x11) S 24 T (toe) S 32 T () S 40 T () S 48 T (update-notifier) N
+(startx) S 8 T () S 16 T () S 24 T (top) S 32 T () S 40 T () S 48 T (upower) N
+(stat) S 8 T () S 16 T () S 24 T (totem) S 32 T () S 40 T () S 48 T (uptime) N
+(static-sh) S 16 T () S 24 T (totem-video-thumbnailer usb-creator-gtk) N
+(stdbuf) S 8 T () S 16 T () S 24 T (touch) S 32 T () S 40 T () S 48 T (usb-devices) N
+(strace) S 8 T () S 16 T () S 24 T (tput) S 32 T () S 40 T () S 48 T (usb_printerid) N
+(strace-log-merge) S 24 T (tr) S 32 T () S 40 T () S 48 T (usbhid-dump) N
+(strings) S 8 T () S 16 T () S 24 T (tracepath) S 40 T () S 48 T (usbreset) N
+(strip) S 8 T () S 16 T () S 24 T (traceroute6) S 40 T () S 48 T (users) N
+(stty) S 8 T () S 16 T () S 24 T (traceroute6.iputils) S 48 T (utmpdump) N
+(su) S 8 T () S 16 T () S 24 T (tracker) S 32 T () S 40 T () S 48 T (uuidgen) N
+(sudo) S 8 T () S 16 T () S 24 T (transicc) S 40 T () S 48 T (uuidparse) N
+(sudoedit) S 16 T () S 24 T (transmission-gtk) S 48 T (uz) N
+(sudoreplay) S 16 T () S 24 T (transset) S 40 T () S 48 T (vdir) N
+(sum) S 8 T () S 16 T () S 24 T (tree) S 32 T () S 40 T () S 48 T (vi) N
+(symcryptrun) S 16 T () S 24 T (troff) S 32 T () S 40 T () S 48 T (view) N
+(sync) S 8 T () S 16 T () S 24 T (true) S 32 T () S 40 T () S 48 T (viewres) N
+(syslinux) S 16 T () S 24 T (truncate) S 40 T () S 48 T (vim) N
+(syslinux-legacy) S 16 T () S 24 T (trust) S 32 T () S 40 T () S 48 T (vim.basic) N
+(system-config-printer) S 24 T (tset) S 32 T () S 40 T () S 48 T (vim.tiny) N
+(system-config-printer-a tsort) S 32 T () S 40 T () S 48 T (vimdiff) N
+(systemctl) S 16 T () S 24 T (ttfread) S 32 T () S 40 T () S 48 T (vimtutor) N
+(systemd) S 8 T () S 16 T () S 24 T (tty) S 32 T () S 40 T () S 48 T (vmstat) N
+(systemd-analyze) S 16 T () S 24 T (tzselect) S 40 T () S 48 T (vmwarectrl) N
+(systemd-ask-password) S 24 T (ua) S 32 T () S 40 T () S 48 T (volname) N
+(systemd-cat) S 16 T () S 24 T (ubuntu-advantage) S 48 T (vstp) N
+(systemd-cgls) S 16 T () S 24 T (ubuntu-bug) S 40 T () S 48 T (w) N
+(systemd-cgtop) S 16 T () S 24 T (ubuntu-core-launcher) S 48 T (w.procps) N
+(systemd-delta) S 16 T () S 24 T (ubuntu-drivers) S 40 T () S 48 T (wall) N
+(systemd-detect-virt) S 24 T (ubuntu-report) S 40 T () S 48 T (watch) N
+(systemd-escape) S 16 T () S 24 T (ubuntu-security-status) S 48 T (watchgnupg) N
+(systemd-hwdb) S 16 T () S 24 T (ucf) S 32 T () S 40 T () S 48 T (wc) N
+(systemd-id128) S 16 T () S 24 T (ucfq) S 32 T () S 40 T () S 48 T (wdctl) N
+(systemd-inhibit) S 16 T () S 24 T (ucfr) S 32 T () S 40 T () S 48 T (wdiff) N
+(systemd-machine-id-setu ucs2any) S 32 T () S 40 T () S 48 T (wget) N
+(systemd-mount) S 16 T () S 24 T (udevadm) S 32 T () S 40 T () S 48 T (whatis) N
+(systemd-notify) S 16 T () S 24 T (udisksctl) S 40 T () S 48 T (whereis) N
+(systemd-path) S 16 T () S 24 T (ul) S 32 T () S 40 T () S 48 T (which) N
+(systemd-resolve) S 16 T () S 24 T (ulockmgr_server) S 40 T () S 48 T (whiptail) N
+(systemd-run) S 16 T () S 24 T (umax_pp) S 32 T () S 40 T () S 48 T (who) N
+(systemd-socket-activate umount) S 32 T () S 40 T () S 48 T (whoami) N
+(systemd-stdio-bridge) S 24 T (uname) S 32 T () S 40 T () S 48 T (whoopsie) N
+(systemd-sysusers) S 24 T (unattended-upgrade) S 48 T (whoopsie-preferences) N
+(systemd-tmpfiles) S 24 T (unattended-upgrades) S 48 T (word-list-compress) N
+(systemd-tty-ask-passwor uncompress) S 40 T () S 48 T (wpa_passphrase) N
+(systemd-umount) S 16 T () S 24 T (unexpand) S 40 T () S 48 T (write) N
+(tabs) S 8 T () S 16 T () S 24 T (unicode_start) S 40 T () S 48 T (x-session-manager) N
+(tac) S 8 T () S 16 T () S 24 T (unicode_stop) S 40 T () S 48 T (x-terminal-emulator) N
+(tail) S 8 T () S 16 T () S 24 T (uniq) S 32 T () S 40 T () S 48 T (x-window-manager) N
+(tar) S 8 T () S 16 T () S 24 T (unity-scope-loader) S 48 T (x-www-browser) N
+(taskset) S 8 T () S 16 T () S 24 T (unlink) S 32 T () S 40 T () S 48 T (x11perf) N
+(tbl) S 8 T () S 16 T () S 24 T (unlz4) S 32 T () S 40 T () S 48 T (x11perfcomp) N
+(tee) S 8 T () S 16 T () S 24 T (unlzma) S 32 T () S 40 T () S 48 T (x86_64) N
+(telnet) S 8 T () S 16 T () S 24 T (unmkinitramfs) S 40 T () S 48 T (x86_64-linux-gnu-addr2l) N
+(telnet.netkit) S 16 T () S 24 T (unopkg) S 32 T () S 40 T () S 48 T (x86_64-linux-gnu-ar) N
+(tempfile) S 16 T () S 24 T (unrar) S 32 T () S 40 T () S 48 T (x86_64-linux-gnu-as) N
+(test) S 8 T () S 16 T () S 24 T (unrar-nonfree) S 40 T () S 48 T (x86_64-linux-gnu-c++fil) N
+(texi2dvi4a2ps) S 16 T () S 24 T (unshare) S 32 T () S 40 T () S 48 T (x86_64-linux-gnu-cpp) N
+(tgz) S 8 T () S 16 T () S 24 T (unsquashfs) S 40 T () S 48 T (x86_64-linux-gnu-cpp-9) N
+(thunderbird) S 16 T () S 24 T (unxz) S 32 T () S 40 T () S 48 T (x86_64-linux-gnu-dwp) N
+(tic) S 8 T () S 16 T () S 24 T (unzip) S 32 T () S 40 T () S 48 T (x86_64-linux-gnu-elfedi) N
+(tificc) S 8 T () S 16 T () S 24 T (unzipsfx) S 40 T () S 48 T (x86_64-linux-gnu-g++) N
+(time) S 8 T () S 16 T () S 24 T (update-alternatives) S 48 T (x86_64-linux-gnu-g++-9) N
+(timedatectl) S 16 T () S 24 T (update-desktop-database x86_64-linux-gnu-gcc) N
+(stdin) (Page 7/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+/v 1 store
+/x0 x v get 3.198801 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(x86_64-linux-gnu-gcc-9) p 24 T (xdg-open) S 40 T () S 48 T (xsetpointer) N
+(x86_64-linux-gnu-gcc-ar xdg-screensaver) S 40 T () S 48 T (xsetroot) N
+(x86_64-linux-gnu-gcc-ar xdg-settings) S 40 T () S 48 T (xsetwacom) N
+(x86_64-linux-gnu-gcc-nm xdg-user-dir) S 40 T () S 48 T (xsm) N
+(x86_64-linux-gnu-gcc-nm xdg-user-dirs-gtk-updat xstdcmap) N
+(x86_64-linux-gnu-gcc-ra xdg-user-dirs-update) S 48 T (xsubpp) N
+(x86_64-linux-gnu-gcc-ra xditview) S 40 T () S 48 T (xvidtune) N
+(x86_64-linux-gnu-gcov) S 24 T (xdpyinfo) S 40 T () S 48 T (xvinfo) N
+(x86_64-linux-gnu-gcov-9 xdriinfo) S 40 T () S 48 T (xwd) N
+(x86_64-linux-gnu-gcov-d xedit) S 32 T () S 40 T () S 48 T (xwininfo) N
+(x86_64-linux-gnu-gcov-d xev) S 32 T () S 40 T () S 48 T (xwud) N
+(x86_64-linux-gnu-gcov-t xeyes) S 32 T () S 40 T () S 48 T (xxd) N
+(x86_64-linux-gnu-gcov-t xfd) S 32 T () S 40 T () S 48 T (xz) N
+(x86_64-linux-gnu-gold) S 24 T (xfontsel) S 40 T () S 48 T (xzcat) N
+(x86_64-linux-gnu-gprof) S 24 T (xgamma) S 32 T () S 40 T () S 48 T (xzcmp) N
+(x86_64-linux-gnu-ld) S 24 T (xgc) S 32 T () S 40 T () S 48 T (xzdiff) N
+(x86_64-linux-gnu-ld.bfd xhost) S 32 T () S 40 T () S 48 T (xzegrep) N
+(x86_64-linux-gnu-ld.gol xinit) S 32 T () S 40 T () S 48 T (xzfgrep) N
+(x86_64-linux-gnu-nm) S 24 T (xinput) S 32 T () S 40 T () S 48 T (xzgrep) N
+(x86_64-linux-gnu-objcop xkbbell) S 32 T () S 40 T () S 48 T (xzless) N
+(x86_64-linux-gnu-objdum xkbcomp) S 32 T () S 40 T () S 48 T (xzmore) N
+(x86_64-linux-gnu-pkg-co xkbevd) S 32 T () S 40 T () S 48 T (yelp) N
+(x86_64-linux-gnu-ranlib xkbprint) S 40 T () S 48 T (yes) N
+(x86_64-linux-gnu-readel xkbvleds) S 40 T () S 48 T (ypdomainname) N
+(x86_64-linux-gnu-size) S 24 T (xkbwatch) S 40 T () S 48 T (zcat) N
+(x86_64-linux-gnu-string xkeystone) S 40 T () S 48 T (zcmp) N
+(x86_64-linux-gnu-strip) S 24 T (xkill) S 32 T () S 40 T () S 48 T (zdiff) N
+(x86_64-pc-linux-gnu-pkg xload) S 32 T () S 40 T () S 48 T (zdump) N
+(xargs) S 8 T () S 16 T () S 24 T (xlogo) S 32 T () S 40 T () S 48 T (zegrep) N
+(xauth) S 8 T () S 16 T () S 24 T (xlsatoms) S 40 T () S 48 T (zenity) N
+(xbiff) S 8 T () S 16 T () S 24 T (xlsclients) S 40 T () S 48 T (zfgrep) N
+(xbrlapi) S 8 T () S 16 T () S 24 T (xlsfonts) S 40 T () S 48 T (zforce) N
+(xcalc) S 8 T () S 16 T () S 24 T (xmag) S 32 T () S 40 T () S 48 T (zgrep) N
+(xclipboard) S 16 T () S 24 T (xman) S 32 T () S 40 T () S 48 T (zip) N
+(xclock) S 8 T () S 16 T () S 24 T (xmessage) S 40 T () S 48 T (zipcloak) N
+(xcmsdb) S 8 T () S 16 T () S 24 T (xmodmap) S 32 T () S 40 T () S 48 T (zipdetails) N
+(xconsole) S 16 T () S 24 T (xmore) S 32 T () S 40 T () S 48 T (zipgrep) N
+(xcursorgen) S 16 T () S 24 T (xprop) S 32 T () S 40 T () S 48 T (zipinfo) N
+(xcutsel) S 8 T () S 16 T () S 24 T (xqxdecode) S 40 T () S 48 T (zipnote) N
+(xdg-dbus-proxy) S 16 T () S 24 T (xrandr) S 32 T () S 40 T () S 48 T (zipsplit) N
+(xdg-desktop-icon) S 24 T (xrdb) S 32 T () S 40 T () S 48 T (zjsdecode) N
+(xdg-desktop-menu) S 24 T (xrefresh) S 40 T () S 48 T (zless) N
+(xdg-email) S 16 T () S 24 T (xset) S 32 T () S 40 T () S 48 T (zmore) N
+(xdg-icon-resource) S 24 T (xsetmode) S 40 T () S 48 T (znew) N
+(xdg-mime) N
+(stdin) (Page 8/8) (2\346M-^\\M-^H 26, 21 22:24) title
+border
+grestore
+(Printed by Lixudong) rhead
+(stdin) (4/4) (\346M-^XM-^_\346M-^\\M-^_\344\272M-^T \344\272M-^L\346M-^\\M-^H 26, 2021) footer
+end % of iso1dict
+pagesave restore
+showpage
+
+%%Trailer
+end
+%%EOF
